@@ -1,10 +1,11 @@
 class Film < ApplicationRecord
   validates_presence_of :imdb_id, :josh_score, message: "this can't be left blank"
-  validates :imdb_id, uniqueness: true, message: "a review has already been added to this film"
+  validates :imdb_id, uniqueness: { message: "a review has already been added to this film" }
   validates :josh_score, numericality: {
     greater_than_or_equal_to: 0,
-    less_than_or_equal_to: 10
-  }, message: "must be between 0 and 10"
+    less_than_or_equal_to: 10,
+    message: "must be between 0 and 10"
+  }
 
   validate :date_watched_cannot_be_in_the_future
 

@@ -16,9 +16,16 @@ class Film < ApplicationRecord
   end
 
   include PgSearch::Model
-  pg_search_scope :search_by_title_and_director,
+  pg_search_scope :films_search,
     against: [ :title, :director ],
     using: {
       tsearch: { prefix: true }
     }
+
+  pg_search_scope :filter_search,
+  against: [ :josh_score, :release_year, :genre],
+  using: {
+    tsearch: { prefix: true }
+  }
+
 end

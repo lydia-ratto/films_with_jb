@@ -1,15 +1,43 @@
-<%= form_with url: films_path, method: :get, class: "d-flex" do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Search by film title or director"
-  %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
-<% end %>
+
+<div class="search d-flex">
+  <%= form_tag films_path, method: :get, data: { search_films_target: 'form' } do %>
+    <div class="search">
+      <%= text_field_tag :query,
+        params[:query],
+        class: "search-input",
+        placeholder: "Search by film title or director",
+        data: {
+          search_films_target: 'input',
+          action: 'keyup->search-films#update' }
+      %>
+    </div>
+    <div class="filters">
+      <%= select_tag :josh_score, options_for_select(1..10),
+        include_blank: 'josh_score',
+        data: {
+          search_films_target: 'filter',
+          action: 'change->search-films#filter' }%>
+      <%= select_tag :release_year, options_for_select(1900..Date.today.year),
+        include_blank: 'release_year',
+        data: {
+          search_films_target: 'filter',
+          action: 'change->search-films#filter' }%>
+      <%= select_tag :genre, options_for_select(@genres),
+        include_blank: 'genre',
+        data: {
+          search_films_target: 'filter',
+          action: 'change->search-films#filter' }%>
+    </div>
+    <%= submit_tag "Search", class: "btn-main", style: "display: none;"%>
+  <% end %>
+</div>
 
 <% @films.each do |film| %>
     <div class="content">
-      <h4> <%= film.title %>  </h4>
-      <h4> <%= film.summary %>  </h4>
+      <%= film.title %>
+      <%= film.release_year %>
+      <%= film.josh_score %>
+      <%= film.genre %>
+      <%= film.summary %>
     </div>
 <% end %>

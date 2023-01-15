@@ -1,1 +1,6 @@
-<%= @films %>
+
+<% @films.each do |film| %>
+    <ul>
+        <li> <%= film.title %> </li>
+    </ul>
+<% end  %>

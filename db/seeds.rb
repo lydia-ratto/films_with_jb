@@ -62,7 +62,7 @@ puts "-----Films created-------"
 # require "open-uri"
 
 # def find_film(film_title)
-#   url = "https://imdb-api.com/en/API/Search/#{ENV['IMDB_API_KEY']}/#{film_title}"
+#   url = "https://imdb-api.com/en/API/SearchMovie/#{ENV['IMDB_API_KEY']}/#{film_title}"
 #   film_results = fetch_data(url)
 #   film_results["results"][0]["id"]
 # end

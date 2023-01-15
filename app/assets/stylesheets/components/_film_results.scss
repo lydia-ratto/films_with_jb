@@ -1,0 +1,19 @@
+.found_film {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: bisque;
+  margin: 2rem;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.271);
+  }
+}
+
+ .selected {
+    border: 3px solid black;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.271);
+  }

@@ -1,1 +1,15 @@
-<%= @films %>
+<%= form_with url: films_path, method: :get, class: "d-flex" do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Search by film title or director"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<% @films.each do |film| %>
+    <div class="content">
+      <h4> <%= film.title %>  </h4>
+      <h4> <%= film.summary %>  </h4>
+    </div>
+<% end %>

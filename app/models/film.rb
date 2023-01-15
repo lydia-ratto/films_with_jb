@@ -14,4 +14,11 @@ class Film < ApplicationRecord
       errors.add(:date_watched, "can't be in the future")
     end
   end
+
+  include PgSearch::Model
+  pg_search_scope :search_by_title_and_director,
+    against: [ :title, :director ],
+    using: {
+      tsearch: { prefix: true }
+    }
 end

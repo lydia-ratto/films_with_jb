@@ -1,7 +1,14 @@
 class FilmsController < ApplicationController
   before_action :set_film, only: %i[show edit]
   def index
-    @films = Film.all
+    if params[:query].present?
+      @films = Film.search_by_title_and_director(params[:query])
+      if @films.nil?
+        @films = Film.all
+      end
+    else
+      @films = Film.all
+    end
   end
 
   def show

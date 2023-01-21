@@ -1,0 +1,43 @@
+<div class="container">
+    <h1>New film review</h1>
+
+    <div class="film_create" data-controller="new-film">
+        <div class="search_input">
+            <%= form_tag new_film_path, method: :get do %>
+                <%= text_field_tag :query,
+                        params[:query] %>
+                        <%= submit_tag "Search", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+
+        <div class="found_films" data-action="click->new-film#select">
+            <% if @found_films["results"].nil? %>
+                <p> <%= "search films above #{@new_film}"	%> </p>
+            <% else %>
+                <% @found_films["results"].each do |film| %>
+                    <div class="found_film" data-id=<%="#{film["id"]}"%> >
+                        <%= image_tag "#{film["image"]}", class: "film_image" %>
+                        <div class="content">
+                            <h4> <%= film["title"] %>  </h4>
+                            <h4> <%= film["description"] %>  </h4>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+
+
+        <div class="create_form">
+            <%= simple_form_for @film do |f| %>
+                <%= f.hidden_field :imdb_id %>
+                <%= f.input :josh_score %>
+                <%= f.input :josh_notes, as: :text %>
+                <%= f.input :date_watched, as: :date, start_year: Date.today.year - 90,
+                                        end_year: Date.today.year, discard_day: true%>
+                <%= f.input :seen_before, as: :radio_buttons %>
+                <%= f.input :location_watched %>
+                <%= f.submit "Submit review", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,11 @@
-<%= @film.title %>
+<div class="container">
+  <div class="found_films" data-action="click->new-film#select">
+    <div class="found_film" >
+      <%= image_tag "#{@film.image_url}", class: "film_image" %>
+      <div class="content">
+        <h4> <%= @film.title %>  </h4>
+        <h4> <%= @film.summary %>  </h4>
+      </div>
+    </div>
+  </div>
+</div>

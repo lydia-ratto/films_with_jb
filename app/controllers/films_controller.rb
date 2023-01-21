@@ -20,6 +20,8 @@ class FilmsController < ApplicationController
   end
 
   def new
+    http_basic_authenticate_or_request_with name: "josh", password: "jbfilms"
+
     @film = Film.new
     if params[:query].blank?
       @found_films = {}

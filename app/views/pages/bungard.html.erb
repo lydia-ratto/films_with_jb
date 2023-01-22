@@ -1,0 +1,12 @@
+<h1>Bungard admin</h1>
+<h2>What do you want to do, Mr Bungard</h2>
+<%= link_to "Add a film review", new_film_url %>
+
+<div class="films">
+  <% @films.each do |film| %>
+      <div class="film">
+        <h3><%= film.title %></h3>
+        <%= link_to "Edit film review", edit_film_url(film) %>
+      </div>
+  <% end  %>
+</div>

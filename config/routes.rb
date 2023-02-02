@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root to: "films#index"
-  get "bungard", to: "pages#bungard"
-  resources :films
-  
+  root to: "pages#home"
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end

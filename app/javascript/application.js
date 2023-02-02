@@ -2,3 +2,5 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
+import "core-js/stable"
+import "regenerator-runtime/runtime"

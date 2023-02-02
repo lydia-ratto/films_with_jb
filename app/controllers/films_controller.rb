@@ -41,6 +41,14 @@ class FilmsController < ApplicationController
     end
 
     @genres = Film.all.distinct.pluck(:genre).flatten.sort.uniq
+
+    respond_to do |format|
+      format.html
+      format.text {
+        render partial: 'list.html',
+        locals: { films: @films }
+      }
+    end
   end
 
   def show

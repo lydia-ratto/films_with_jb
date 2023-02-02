@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import SearchFilmsController from "./search_films_controller"
 application.register("film search", SearchFilmsController)
+
+import RefreshListController from "./refresh_list_controller"
+application.register("refresh list", RefreshListController)

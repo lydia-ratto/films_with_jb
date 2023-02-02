@@ -38,6 +38,16 @@ class FilmsController < ApplicationController
         @films = Film.where(josh_score: params[:josh_score], genre: params[:genre])
       end
     end
+
+    @genres = Film.all.distinct.pluck(:genre).flatten.sort.uniq
+
+    respond_to do |format|
+      format.html
+      format.text {
+        render partial: 'list.html',
+        locals: { films: @films }
+      }
+    end
   end
 
   def show

@@ -1,4 +1,4 @@
-class FilmsController < ApplicationController
+class Api::V1::FilmsController < ApplicationController
   before_action :set_film, only: %i[show edit]
   def index
     if params[:query].present?
@@ -48,6 +48,8 @@ class FilmsController < ApplicationController
         locals: { films: @films }
       }
     end
+
+    render json: @films
   end
 
   def show
@@ -83,6 +85,7 @@ class FilmsController < ApplicationController
 
   def set_film
     @film = Film.find(params[:id])
+    render json: @film
   end
 
   def film_params

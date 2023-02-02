@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class Api::V1::PagesController < ApplicationController
   def bungard
     http_basic_authenticate_or_request_with name: "josh", password: "jbfilms"
 

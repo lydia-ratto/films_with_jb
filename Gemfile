@@ -30,6 +30,10 @@ gem "jbuilder"
 # for dev seed
 gem 'faker'
 
+#Webpacker and React
+gem 'webpacker'
+gem 'react-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

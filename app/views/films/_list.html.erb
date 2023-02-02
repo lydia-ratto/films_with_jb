@@ -1,0 +1,11 @@
+<div data-search-films-target="list">
+  <% @films.each do |film| %>
+    <div class="content">
+      <%= film.title %>
+      <%= film.release_year %>
+      <%= film.josh_score %>
+      <%= film.genre %>
+      <%= film.summary %>
+    </div>
+  <% end %>
+</div>

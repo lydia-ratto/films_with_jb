@@ -30,6 +30,9 @@ gem "jbuilder"
 # for dev seed
 gem 'faker'
 
+#Search funcitionality
+gem 'pg_search'
+
 #Webpacker and React
 gem 'webpacker'
 gem 'react-rails'

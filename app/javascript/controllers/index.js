@@ -6,3 +6,9 @@ import { application } from "./application"
 
 import NewFilmController from "./new_film_controller"
 application.register("new-film", NewFilmController)
+
+import RefreshListController from "./refresh_list_controller"
+application.register("refresh-list", RefreshListController)
+
+import SearchFilmsController from "./search_films_controller"
+application.register("refresh-list", SearchFilmsController)

@@ -1,7 +1,43 @@
 class FilmsController < ApplicationController
   before_action :set_film, only: %i[show edit]
   def index
-    @films = Film.all
+    if params[:query].present?
+      if params[:josh_score].blank? && params[:release_year].blank? && params[:genre].blank?
+        @films = Film.films_search(params[:query])
+      elsif params[:josh_score].present? && params[:release_year].blank? && params[:genre].blank?
+        @films = Film.where(josh_score: params[:josh_score]).films_search(params[:query])
+      elsif params[:josh_score].blank? && params[:release_year].present? && params[:genre].blank?
+        @films = Film.where(release_year: params[:release_year]).films_search(params[:query])
+      elsif params[:josh_score].blank? && params[:release_year].blank? && params[:genre].present?
+        @films = Film.where(genre: params[:genre]).films_search(params[:query])
+      elsif params[:josh_score].present? && params[:release_year].present? && params[:genre].blank?
+        @films = Film.where(josh_score: params[:josh_score], release_year: params[:release_year]).films_search(params[:query])
+      elsif params[:josh_score].present? && params[:release_year].blank? && params[:genre].present?
+        @films = Film.where(josh_score: params[:josh_score], genre: params[:genre]).films_search(params[:query])
+      elsif params[:josh_score].blank? && params[:release_year].present? && params[:genre].present?
+        @films = Film.where(release_year: params[:release_year], genre: params[:genre]).films_search(params[:query])
+      else
+        @films = Film.where(josh_score: params[:josh_score], genre: params[:genre]).films_search(params[:query])
+      end
+    else
+      if params[:josh_score].blank? && params[:release_year].blank? && params[:genre].blank?
+        @films = Film.all
+      elsif params[:josh_score].present? && params[:release_year].blank? && params[:genre].blank?
+        @films = Film.where(josh_score: params[:josh_score])
+      elsif params[:josh_score].blank? && params[:release_year].present? && params[:genre].blank?
+        @films = Film.where(release_year: params[:release_year])
+      elsif params[:josh_score].blank? && params[:release_year].blank? && params[:genre].present?
+        @films = Film.where(genre: params[:genre])
+      elsif params[:josh_score].present? && params[:release_year].present? && params[:genre].blank?
+        @films = Film.where(josh_score: params[:josh_score], release_year: params[:release_year])
+      elsif params[:josh_score].present? && params[:release_year].blank? && params[:genre].present?
+        @films = Film.where(josh_score: params[:josh_score], genre: params[:genre])
+      elsif params[:josh_score].blank? && params[:release_year].present? && params[:genre].present?
+        @films = Film.where(release_year: params[:release_year], genre: params[:genre])
+      else
+        @films = Film.where(josh_score: params[:josh_score], genre: params[:genre])
+      end
+    end
   end
 
   def show
@@ -26,8 +62,7 @@ class FilmsController < ApplicationController
     else
       @found_films = find_films(params[:query])
     end
-
-  puts @found_films
+    puts @found_films
   end
 
   def edit
@@ -42,6 +77,6 @@ class FilmsController < ApplicationController
 
   def film_params
     params.require(:film).permit(:imdb_id, :josh_score, :josh_notes, :date_watched, :seen_before, :location_watched)
-  end 
-  
+  end
+
 end

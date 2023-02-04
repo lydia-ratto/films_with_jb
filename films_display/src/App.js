@@ -3,7 +3,7 @@ import axios from 'axios';
 import Films from './components/films';
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost3000/api/v1/films";
+const API_URL = "http://localhost:3000/api/v1/films";
 
 function getAPIData() {
     return axios.get(API_URL).then((response) => response.data)
@@ -16,6 +16,7 @@ function App() {
     let mounted = true;
     getAPIData().then((items) => {
       if (mounted) {
+        console.log(items);
         setFilms(items);
       }
     });
